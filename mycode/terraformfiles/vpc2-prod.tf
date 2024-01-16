@@ -200,7 +200,7 @@ resource "aws_instance" "prod-inst-1"{
                      hostnamectl set-hostname inst1
                      sudo apt-get update -y
                      wget https://raw.githubusercontent.com/Nikhil-tr/install/main/kube-master.sh
-                     /bin/bash kube-master.sh
+                     /bin/bash kube-master.sh -y
                  EOF
 }
 resource "aws_instance" "prod-inst-2"{
@@ -219,7 +219,7 @@ resource "aws_instance" "prod-inst-2"{
                      hostnamectl set-hostname inst2
                      sudo apt-get update -y
                      wget https://raw.githubusercontent.com/Nikhil-tr/install/main/kube-client.sh
-                     /bin/bash kube-client.sh
+                     /bin/bash kube-client.sh -y
                  EOF
 }
 resource "aws_instance" "prod-inst-3"{
@@ -238,7 +238,7 @@ resource "aws_instance" "prod-inst-3"{
                      hostnamectl set-hostname inst3
                      sudo apt-get update -y
                      wget https://raw.githubusercontent.com/Nikhil-tr/install/main/kube-client.sh
-                     /bin/bash kube-client.sh
+                     /bin/bash kube-client.sh -y
                  EOF
 }
 resource "aws_instance" "prod-inst-4"{
@@ -256,7 +256,7 @@ resource "aws_instance" "prod-inst-4"{
                      sudo su -
                      hostnamectl set-hostname bastion
                      wget https://raw.githubusercontent.com/Nikhil-tr/install/main/kube-client.sh
-                     /bin/bash kube-client.sh
+                     /bin/bash kube-client.sh -y
                  EOF
 }
 
