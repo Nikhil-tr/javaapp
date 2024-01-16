@@ -1,0 +1,6 @@
+- name: "install java,maven and jenkins"
+  hosts: localhost
+  become: true
+  tasks:
+  - name: install
+    script: install.sh
