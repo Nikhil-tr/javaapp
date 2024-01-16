@@ -149,6 +149,13 @@ resource "aws_security_group" "prod-sg-priv" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
   ingress {
+    description      = "for kube join"
+    from_port        = 6443
+    to_port          = 6443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  ingress {
     description      = "http from VPC"
     from_port        = 80
     to_port          = 80
