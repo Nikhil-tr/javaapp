@@ -3,14 +3,14 @@
   tasks: 
     - name: Deploying Application pods...
       shell: | 
-         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep sampleapp | wc -l` -gt 0 ]; then  
+         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep devopsproj3 | wc -l` -gt 0 ]; then  
             echo "deleteing previous application deployment"
-            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep sampleapp`
+            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep devopsproj3`
             echo "creating new application deployment"
-            kubectl create deployment sampleapp --image=lerndevops/samplejavaapp:{{ build }}
+            kubectl create deployment devopsproj3 --image=nikhiltr1/devopsproj3:{{ build }}
          else 
             echo "Deploying Sampleapp Application"
-            kubectl create deployment sampleapp --image=lerndevops/samplejavaapp:{{ build }}
+            kubectl create deployment devopsproj3 --image=nikhiltr1/devopsproj3:{{ build }}
          fi
     - name: deploying service
       shell: |
@@ -19,10 +19,10 @@
             #kubectl delete svc `kubectl get svc | grep sampleapp | awk '{print $1}'`
          else
             echo "Creating App Services"
-            kubectl expose deployment sampleapp --name sampleapp --type NodePort --port 80 --target-port 8080
+            kubectl expose deployment devopsproj3 --name devopsproj3 --type NodePort --port 80 --target-port 8080
          fi
     - name: increase replicas 
-      shell: kubectl scale deploy sampleapp --replicas=2
+      shell: kubectl scale deploy devopsproj3 --replicas=2
       
     #- name: deploy app
     #  shell: kubectl create deployment sampleapp --image=lerndevops/samplejavaapp:{{ build }}
