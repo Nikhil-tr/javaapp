@@ -3,26 +3,26 @@
   tasks: 
     - name: Deploying Application pods...
       shell: | 
-         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep projapp | wc -l` -gt 0 ]; then  
+         if [ `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep devopsproj3 | wc -l` -gt 0 ]; then  
             echo "deleteing previous application deployment"
-            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep projapp`
+            kubectl delete deployment `kubectl get deployment | grep -v NAME | awk '{print $1}' | grep devopsproj3`
             echo "creating new application deployment"
-            kubectl create deployment projapp --image=nikhiltr1/projapp:{{ build }}
+            kubectl create deployment devopsproj3 --image=nikhiltr1/devopsproj3:{{ build }}
          else 
             echo "Deploying Sampleapp Application"
-            kubectl create deployment projapp --image=nikhiltr1/projapp:{{ build }}
+            kubectl create deployment devopsproj3 --image=nikhiltr1/devopsproj3:{{ build }}
          fi
     - name: deploying service
       shell: |
-         if [ `kubectl get svc | grep projapp  | awk '{print $1}' | wc -l` -gt 0 ]; then
+         if [ `kubectl get svc | grep devopsproj3  | awk '{print $1}' | wc -l` -gt 0 ]; then
             echo "app service found, No actions taken"
             #kubectl delete svc `kubectl get svc | grep projapp | awk '{print $1}'`
          else
             echo "Creating App Services"
-            kubectl expose deployment projapp --name projapp --type NodePort --port 80 --target-port 8080
+            kubectl expose deployment devopsproj3 --name devopsproj3 --type NodePort --port 80 --target-port 8080
          fi
     - name: increase replicas 
-      shell: kubectl scale deploy projapp --replicas=2
+      shell: kubectl scale deploy devopsproj3 --replicas=2
       
     #- name: deploy app
     #  shell: kubectl create deployment projapp --image=nikhiltr1/projapp:{{ build }}
